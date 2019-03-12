@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html ng-app="myModel">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="Scripts/angular.min.js"></script>
+
+    <script src="Scripts/ModelConScript.js"></script>
+    <link href="Style.css" rel="stylesheet" />
+</head>
+<body>
+    <div ng-controller="myController">
+        <input type="number" step="1" min="0" max="5" ng-model="rowLimit" />
+        <select ng-model="sortCol">
+            <option value="Firstname">Name</option>
+            <option value="Salary">Salary</option>
+            <option value="-Cites">Cites</option>
+        </select>
+        <br />
+        <input type="text" placeholder="Search Text" ng-model="searchText.Cites" />
+        Exact Match : <input type="checkbox" ng-model="exactMatch" />
+        <table>
+            <thead>
+                <tr>
+                    <th>Firstname</th>
+                    <th>Salary</th>
+                    <th>City</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="Page in Pagination | orderBy:sortCol | filter:searchText:exactMatch">
+                    <td>
+                        {{Page.Firstname | uppercase}}
+                    </td>
+                    <td>
+                        {{Page.Salary }}
+                    </td>
+                    <td>
+                        {{Page.Cites }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ul ng-repeat="list in mylist">
+            <li>
+                {{list.Firstname | uppercase}} -- {{list.Salary }}
+
+                <ul>
+                    <li ng-repeat="childlist in list.Cites"> {{childlist.name}}</li>
+                </ul>
+            </li>
+
+        </ul>
+        <div ng-include="PartialView">
+
+
+        </div>
+    </div>
+    
+  
+</body>
+</html>
